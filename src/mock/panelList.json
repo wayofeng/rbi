@@ -1,0 +1,290 @@
+[
+  {
+    "id": "h1",
+    "config": {
+      "icon": "iconxialakuang",
+      "componentName": "筛选器",
+      "component": "rbi-filter",
+      "componentType": "help",
+      "dataGrid": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  },
+  {
+    "id": "h2",
+    "config": {
+      "icon": "iconwenbenyu",
+      "componentName": "文本框",
+      "component": "rbi-text",
+      "componentType": "help",
+      "dataGrid": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  },
+  {
+    "id": "h3",
+    "config": {
+      "icon": "iconwangyekuang",
+      "componentName": "网页框",
+      "component": "rbi-iframe",
+      "componentType": "help",
+      "dataGrid": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  },
+  {
+    "id": "h4",
+    "config": {
+      "icon": "icontabye-copy-copy",
+      "componentName": "tab容器",
+      "component": "rbi-tab",
+      "componentType": "help",
+      "dataGrid": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  },
+  {
+    "id": "h5",
+    "config": {
+      "icon": "icontupian",
+      "componentName": "图片",
+      "component": "rbi-img",
+      "componentType": "help",
+      "dataGrid": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  },
+  {
+    "id": "a",
+    "config": {
+      "icon": "iconzhexiantu",
+      "componentName": "折线图",
+      "component": "rbi-line",
+      "componentType": "chart",
+      "dataGrid": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  },
+  {
+    "id": "b",
+    "config": {
+      "icon": "iconzhuzhuangtu",
+      "componentName": "柱状图",
+      "component": "rbi-column",
+      "componentType": "chart",
+      "dataGrid": {
+        "x": 4,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  },
+  {
+    "id": "c",
+    "config": {
+      "icon": "iconbingtu",
+      "componentName": "饼图",
+      "component": "rbi-pie",
+      "componentType": "chart",
+      "dataGrid": {
+        "x": 6,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  },
+  {
+    "id": "d",
+    "config": {
+      "icon": "iconrelitu",
+      "componentName": "表格",
+      "component": "rbi-table",
+      "componentType": "chart",
+      "dataGrid": {
+        "x": 6,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  },
+  {
+    "id": "e",
+    "config": {
+      "icon": "iconditu",
+      "componentName": "地图",
+      "component": "rbi-map",
+      "componentType": "chart",
+      "dataGrid": {
+        "x": 6,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  },
+  {
+    "id": "f",
+    "config": {
+      "icon": "iconpinicon",
+      "componentName": "看板",
+      "component": "rbi-board",
+      "componentType": "chart",
+      "dataGrid": {
+        "x": 6,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  },
+  {
+    "id": "g",
+    "config": {
+      "icon": "iconyibiaopan",
+      "componentName": "仪表盘",
+      "component": "rbi-gauge",
+      "componentType": "chart",
+      "dataGrid": {
+        "x": 6,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  },
+  {
+    "id": "h",
+    "config": {
+      "icon": "iconsandiantu",
+      "componentName": "散点图",
+      "component": "rbi-scatter",
+      "componentType": "chart",
+      "dataGrid": {
+        "x": 6,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  },
+  {
+    "id": "i",
+    "config": {
+      "icon": "iconloudoutu",
+      "componentName": "漏斗",
+      "component": "rbi-funnel",
+      "componentType": "chart",
+      "dataGrid": {
+        "x": 6,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  },
+  {
+    "id": "j",
+    "config": {
+      "icon": "iconleidatu",
+      "componentName": "雷达图",
+      "component": "rbi-radar",
+      "componentType": "chart",
+      "dataGrid": {
+        "x": 6,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  },
+  {
+    "id": "k",
+    "config": {
+      "icon": "iconciyun",
+      "componentName": "词云图",
+      "component": "rbi-wordCloud",
+      "componentType": "chart",
+      "dataGrid": {
+        "x": 6,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  },
+  {
+    "id": "l",
+    "config": {
+      "icon": "iconshutu",
+      "componentName": "树图",
+      "component": "rbi-tree",
+      "componentType": "chart",
+      "dataGrid": {
+        "x": 6,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  },
+  {
+    "id": "m",
+    "config": {
+      "icon": "iconshujuzhexiantu",
+      "componentName": "组合图",
+      "component": "rbi-pie",
+      "componentType": "chart",
+      "dataGrid": {
+        "x": 6,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      },
+      "settings": {}
+    }
+  }
+]

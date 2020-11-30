@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import './ReportHeader.less'
+import { Button, Space } from 'antd'
+import './ReportHeader.scss'
 
 class ReportHeader extends Component {
 
@@ -8,6 +9,12 @@ class ReportHeader extends Component {
       <div className="report-header">
         <div className="report-name">
           未命名报表
+        </div>
+        <div className="report-action">
+          <Space>
+            <Button type="primary" shape="round">保存</Button>
+            <Button type="primary" shape="round">发布</Button>
+          </Space>
         </div>
       </div>
     )

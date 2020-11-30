@@ -1,0 +1,15 @@
+.report-setting {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .report-setting-header {
+    flex-basis: 45px;
+    line-height: 45px;
+    border-left: 1px solid #efefef;
+    padding: 0 10px;
+  }
+  .report-setting-content {
+    flex: 1;
+    box-shadow:-2px 0px 2px -3px #dddddd;
+  }
+}

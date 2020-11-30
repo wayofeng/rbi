@@ -1,0 +1,12 @@
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  .report-name {
+    display: block;
+    width: 160px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

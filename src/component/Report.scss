@@ -1,0 +1,10 @@
+.report-layout {
+  .ant-layout-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #efefef;
+  }
+  .ant-layout-content {
+    display: flex;
+    flex-direction: column;
+  }
+}
