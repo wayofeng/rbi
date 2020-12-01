@@ -1,6 +1,6 @@
 [
   {
-    "id": "h1",
+    "id": "",
     "config": {
       "icon": "iconxialakuang",
       "componentName": "筛选器",
@@ -9,14 +9,14 @@
       "dataGrid": {
         "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 6
       },
       "settings": {}
     }
   },
   {
-    "id": "h2",
+    "id": "",
     "config": {
       "icon": "iconwenbenyu",
       "componentName": "文本框",
@@ -25,14 +25,14 @@
       "dataGrid": {
         "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 6
       },
       "settings": {}
     }
   },
   {
-    "id": "h3",
+    "id": "",
     "config": {
       "icon": "iconwangyekuang",
       "componentName": "网页框",
@@ -41,14 +41,14 @@
       "dataGrid": {
         "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 6
       },
       "settings": {}
     }
   },
   {
-    "id": "h4",
+    "id": "",
     "config": {
       "icon": "icontabye-copy-copy",
       "componentName": "tab容器",
@@ -57,14 +57,14 @@
       "dataGrid": {
         "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 6
       },
       "settings": {}
     }
   },
   {
-    "id": "h5",
+    "id": "",
     "config": {
       "icon": "icontupian",
       "componentName": "图片",
@@ -73,14 +73,14 @@
       "dataGrid": {
         "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 6
       },
       "settings": {}
     }
   },
   {
-    "id": "a",
+    "id": "",
     "config": {
       "icon": "iconzhexiantu",
       "componentName": "折线图",
@@ -89,200 +89,200 @@
       "dataGrid": {
         "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 6
       },
       "settings": {}
     }
   },
   {
-    "id": "b",
+    "id": "",
     "config": {
       "icon": "iconzhuzhuangtu",
       "componentName": "柱状图",
       "component": "rbi-column",
       "componentType": "chart",
       "dataGrid": {
-        "x": 4,
+        "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 6
       },
       "settings": {}
     }
   },
   {
-    "id": "c",
+    "id": "",
     "config": {
       "icon": "iconbingtu",
       "componentName": "饼图",
       "component": "rbi-pie",
       "componentType": "chart",
       "dataGrid": {
-        "x": 6,
+        "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 6
       },
       "settings": {}
     }
   },
   {
-    "id": "d",
+    "id": "",
     "config": {
       "icon": "iconrelitu",
       "componentName": "表格",
       "component": "rbi-table",
       "componentType": "chart",
       "dataGrid": {
-        "x": 6,
+        "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 6
       },
       "settings": {}
     }
   },
   {
-    "id": "e",
+    "id": "",
     "config": {
       "icon": "iconditu",
       "componentName": "地图",
       "component": "rbi-map",
       "componentType": "chart",
       "dataGrid": {
-        "x": 6,
+        "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 6
       },
       "settings": {}
     }
   },
   {
-    "id": "f",
+    "id": "",
     "config": {
       "icon": "iconpinicon",
       "componentName": "看板",
       "component": "rbi-board",
       "componentType": "chart",
       "dataGrid": {
-        "x": 6,
+        "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 6
       },
       "settings": {}
     }
   },
   {
-    "id": "g",
+    "id": "",
     "config": {
       "icon": "iconyibiaopan",
       "componentName": "仪表盘",
       "component": "rbi-gauge",
       "componentType": "chart",
       "dataGrid": {
-        "x": 6,
+        "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 6
       },
       "settings": {}
     }
   },
   {
-    "id": "h",
+    "id": "",
     "config": {
       "icon": "iconsandiantu",
       "componentName": "散点图",
       "component": "rbi-scatter",
       "componentType": "chart",
       "dataGrid": {
-        "x": 6,
+        "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 6
       },
       "settings": {}
     }
   },
   {
-    "id": "i",
+    "id": "",
     "config": {
       "icon": "iconloudoutu",
       "componentName": "漏斗",
       "component": "rbi-funnel",
       "componentType": "chart",
       "dataGrid": {
-        "x": 6,
+        "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 7
       },
       "settings": {}
     }
   },
   {
-    "id": "j",
+    "id": "",
     "config": {
       "icon": "iconleidatu",
       "componentName": "雷达图",
       "component": "rbi-radar",
       "componentType": "chart",
       "dataGrid": {
-        "x": 6,
+        "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 6
       },
       "settings": {}
     }
   },
   {
-    "id": "k",
+    "id": "",
     "config": {
       "icon": "iconciyun",
       "componentName": "词云图",
       "component": "rbi-wordCloud",
       "componentType": "chart",
       "dataGrid": {
-        "x": 6,
+        "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 6
       },
       "settings": {}
     }
   },
   {
-    "id": "l",
+    "id": "",
     "config": {
       "icon": "iconshutu",
       "componentName": "树图",
       "component": "rbi-tree",
       "componentType": "chart",
       "dataGrid": {
-        "x": 6,
+        "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 6
       },
       "settings": {}
     }
   },
   {
-    "id": "m",
+    "id": "",
     "config": {
       "icon": "iconshujuzhexiantu",
       "componentName": "组合图",
-      "component": "rbi-pie",
+      "component": "rbi-group",
       "componentType": "chart",
       "dataGrid": {
-        "x": 6,
+        "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 2
+        "w": 3,
+        "h": 6
       },
       "settings": {}
     }

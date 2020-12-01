@@ -1,71 +1,98 @@
 import React, { Component } from 'react'
-import GridLayout, { Responsive, WidthProvider } from 'react-grid-layout'
+import { Responsive, WidthProvider } from 'react-grid-layout'
 import ChartPanel from './ChartPanel'
 
 import './ReportContent.scss'
-
-import panelListDefault from '../../mock/panelList.json'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
 class ReportContent extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      panelList: []
     }
-    this.handleDrag = this.handleDrag.bind(this)
+    this.handleDragStop = this.handleDragStop.bind(this)
+    this.handleResizeStop = this.handleResizeStop.bind(this)
+    this.handleClickPanel = this.handleClickPanel.bind(this)
+    this.handleShowMenu = this.handleShowMenu.bind(this)
+    this.handleHideMenu = this.handleHideMenu.bind(this)
+    this.handleDeletePanel = this.handleDeletePanel.bind(this)
   }
 
-  componentDidMount() {
-    const panelList = this.getPanelListFromStroage() || panelListDefault
-    this.setPanelList(panelList)
-    this.savePanelListToStroage()
+  // 结束拖拽移动面板
+  handleDragStop(dataGrids, oldDataGrid, newDataGrid) {
+    const panel = this.props.panelList.find(item => item.id === newDataGrid.i)
+    this.props.handleChangePanel(panel, 'config.dataGrid', newDataGrid)
   }
 
-  componentDidUpdate() {
-    this.savePanelListToStroage()
+  // 结束拖拽缩放面板
+  handleResizeStop(dataGrids, oldDataGrid, newDataGrid) {
+    const panel = this.props.panelList.find(item => item.id === newDataGrid.i)
+    this.props.handleChangePanel(panel, 'config.dataGrid', newDataGrid)
   }
 
-  setPanelList(panelList) {
-    this.setState((state) => {
-      return { ...state, panelList }
-    })
+  // 激活面板
+  handleActive(panel) {
+    this.props.handleChangePanel(panel, 'config.active', true)
   }
 
-  savePanelListToStroage() {
-    localStorage.setItem('panelList', JSON.stringify(this.state.panelList))
+  // 取消面板激活
+  handleInActivePanel() {
+    const oldActivePanel = this.props.panelList.find(panel => panel.config.active)
+    oldActivePanel && this.props.handleChangePanel(oldActivePanel, 'config.active', false)
+    oldActivePanel && this.props.handleChangePanel(oldActivePanel, 'config.menuShow', false)
   }
 
-  getPanelListFromStroage() {
-    const panelListStr = localStorage.getItem('panelList')
-    return !panelListStr ? '' : JSON.parse(panelListStr)
+  // 点击面板
+  handleClickPanel(panel) {
+    this.handleInActivePanel()
+    this.handleActive(panel)
   }
 
-  handleDrag(dataGrids) {
-    const { panelList } = this.state 
-    const newPanelList = dataGrids.map(dataGrid => {
-      const oldPanel = panelList.find(val => val.id === dataGrid.i)
-      oldPanel.config.dataGrid = dataGrid
-      return oldPanel
-    })
-    this.setPanelList(newPanelList)
+  // 显示面板菜单
+  handleShowMenu(panel) {
+    this.handleInActivePanel()
+    this.handleActive(panel)
+    this.props.handleChangePanel(panel, 'config.menuShow', true)
+  }
+
+  // 隐藏面板菜单
+  handleHideMenu(panel) {
+    this.props.handleChangePanel(panel, 'config.menuShow', false)
+  }
+
+  // 删除面板
+  handleDeletePanel (panel) {
+    this.props.handleDeletePanel(panel)
   }
 
   render() {
     const breakpoints = { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }
     const cols = { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }
 
-    const { panelList } = this.state
+    const { panelList } = this.props
 
-    const panelItems = panelList.map(panel =>
-      <div key={panel.id} data-grid={panel.config.dataGrid}>
-        <ChartPanel></ChartPanel>
-      </div>
-    )
+    const panelItems = panelList.map(panel => {
+      const panelItemClassName = `panel-item ${panel.config.active ? 'active' : ''}`
+      return (
+        <div key={panel.id} data-grid={panel.config.dataGrid} className={panelItemClassName} onClick={() => this.handleClickPanel(panel)}>
+          <ChartPanel
+            panel={panel}
+            handleDeletePanel={this.handleDeletePanel}
+            handleShowMenu={this.handleShowMenu}
+            handleHideMenu={this.handleHideMenu}></ChartPanel>
+        </div>
+      )
+    })
     return (
       <div className="report-content">
-        <ResponsiveGridLayout onDragStop={this.handleDrag} className="layout" rowHeight={30} breakpoints={breakpoints} cols={cols}>
+        <ResponsiveGridLayout
+          onDragStop={this.handleDragStop}
+          onResizeStop={this.handleResizeStop}
+          className="layout"
+          rowHeight={30}
+          breakpoints={breakpoints}
+          cols={cols}>
           {panelItems}
         </ResponsiveGridLayout>
       </div>

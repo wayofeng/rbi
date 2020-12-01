@@ -7,10 +7,8 @@ class ReportSetting extends Component {
     return (
       <div className="report-setting">
         <div className="report-setting-header">
-          report-setting-header
         </div>
         <div className="report-setting-content">
-          ReportSetting
         </div>
       </div>
     )

@@ -8,18 +8,26 @@ import panelListDefault from '../../mock/panelList.json'
 class ReportComponent extends Component {
   constructor(props) {
     super(props);
+
+    this.addPanel = this.addPanel.bind(this)
+
     this.state = {
       componentList: panelListDefault
     }
+
+  }
+
+  addPanel (item) {
+    this.props.handleAddPanel(item)
   }
 
   render() {
-    function getComponentItems(list) {
+    const getComponentItems = (list) => {
       return list.map(item => {
         const classNameList = `iconfont ${item.config.icon}`
-        return (<li className="component-item">
+        return (<li className="component-item" key={item.config.component} onClick={e => this.addPanel(item, e)}> 
           <Tooltip title={item.config.componentName}>
-            <i class="iconfont" className={classNameList}></i>
+            <i className={classNameList}></i>
           </Tooltip>
         </li>)
       })

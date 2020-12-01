@@ -1,0 +1,35 @@
+.chart-panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  &:hover {
+    .action-btn {
+      display: block;
+    }
+  }
+  .action-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #888888;
+    cursor: pointer;
+    display: none;
+  }
+  .chart-menu {
+    position: absolute;
+    right: 10px;
+    top: 40px;
+    width: 80px;
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    padding: 5px 10px;
+    box-shadow: 2px 3px 5px 0px #e7e7e7;
+    .chart-menu-list {
+      .chart-menu-item {
+        font-size: 12px;
+        text-align: center;
+        cursor: pointer;
+      }
+    }
+  }
+}
