@@ -10,18 +10,15 @@ class RbiLine extends Component {
   }
 
   render() {
-    const { title } = this.props.panel.config
-    const data = [
-      { year: '1991', value: 3 },
-      { year: '1992', value: 4 },
-      { year: '1993', value: 3.5 },
-      { year: '1994', value: 5 },
-      { year: '1995', value: 4.9 },
-      { year: '1996', value: 6 },
-      { year: '1997', value: 7 },
-      { year: '1998', value: 9 },
-      { year: '1999', value: 13 },
-    ]
+    const { title, data } = this.props.panel.config
+    let xField = null
+    let yField = null
+    if (data && Array.isArray(data) && data.length) {
+      const dataItem = data[0]
+      const keys = Object.keys(dataItem)
+      xField = keys[0]
+      yField = keys[1]
+    }
     return (
       <div className="rbi-line">
         <LineChart
@@ -31,12 +28,8 @@ class RbiLine extends Component {
             visible: true,
             text: title,
           }}
-          description={{
-            visible: true,
-            text: '用平滑的曲线代替折线。',
-          }}
-          xField='year'
-          yField='value'
+          xField={xField}
+          yField={yField}
         />
       </div>
     )

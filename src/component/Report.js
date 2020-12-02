@@ -48,9 +48,11 @@ class Report extends Component {
 
   // 添加组件
   addPanel(sourcePanel) {
+    const y = this.computedComponentY()
     const panel = _.cloneDeep(sourcePanel) 
     panel.id = UUID.generate()
     panel.config.title = _.uniqueId('panel-') 
+    panel.config.dataGrid.y = y
 
     const newPanelList = [...this.state.panelList, panel]
     this.setState({ panelList: newPanelList }, () => {
@@ -59,6 +61,17 @@ class Report extends Component {
     })
   }
 
+  // 计算新组件放置的位置
+  computedComponentY () {
+    const { panelList } = this.state
+    const yList = panelList.map(panel => panel.config.dataGrid.y + panel.config.dataGrid.h)
+    if (yList.length) {
+      const yMax = Math.max(...yList)
+      console.log(yMax)
+      return Number(yMax)
+    }
+    return 0
+  } 
   // 删除组件
   deletePanel(panel) {
     const { panelList } = this.state
@@ -165,6 +178,7 @@ class Report extends Component {
               <ReportComponent handleAddPanel={this.addPanel}></ReportComponent>
               <ReportContent
                 panelList={panelList}
+                handleAddPanel={this.addPanel}
                 handleActivePanel={this.handleActivePanel}
                 handleInActivePanel={this.handleInActivePanel}
                 handleDeletePanel={this.deletePanel}

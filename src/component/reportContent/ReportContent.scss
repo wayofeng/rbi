@@ -1,6 +1,8 @@
 .report-content {
+  width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   .panel-item {
     background-color: #ffffff;
     border: 1px solid #ebebeb;

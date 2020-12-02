@@ -17,6 +17,8 @@ class ReportContent extends Component {
     this.handleShowMenu = this.handleShowMenu.bind(this)
     this.handleHideMenu = this.handleHideMenu.bind(this)
     this.handleDeletePanel = this.handleDeletePanel.bind(this)
+    this.handleDragOver = this.handleDragOver.bind(this)
+    this.handleDrop = this.handleDrop.bind(this)
   }
 
   // 结束拖拽移动面板
@@ -32,7 +34,7 @@ class ReportContent extends Component {
   }
 
   // 点击面板
-  handleClickPanel(e, panel) {
+  handleClickPanel(panel, e) {
     e.stopPropagation()
     this.props.handleInActivePanel()
     this.props.handleActivePanel(panel)
@@ -49,14 +51,28 @@ class ReportContent extends Component {
   }
 
   // 删除面板
-  handleDeletePanel (panel) {
+  handleDeletePanel(panel) {
     this.props.handleDeletePanel(panel)
   }
 
   // 点击画布区域
-  handleClickContent (e) {
+  handleClickContent(e) {
     e.stopPropagation()
     this.props.handleClickContent()
+  }
+
+  // 拖拽进入
+  handleDragOver (e) {
+    e.preventDefault()
+  }
+
+  // 释放拖拽目标
+  handleDrop (e) {
+    e.preventDefault()
+    const data = e.dataTransfer.getData('panel')
+    if (!data) return
+    const panel = JSON.parse(data)
+    this.props.handleAddPanel(panel)
   }
 
   render() {
@@ -68,7 +84,7 @@ class ReportContent extends Component {
     const panelItems = panelList.map(panel => {
       const panelItemClassName = `panel-item ${panel.config.active ? 'active' : ''}`
       return (
-        <div key={panel.id} data-grid={panel.config.dataGrid} className={panelItemClassName} onClick={(e) => this.handleClickPanel(e, panel)}>
+        <div key={panel.id} data-grid={panel.config.dataGrid} className={panelItemClassName} onClick={(e) => this.handleClickPanel(panel, e)}>
           <ChartPanel
             panel={panel}
             handleDeletePanel={this.handleDeletePanel}
@@ -78,7 +94,11 @@ class ReportContent extends Component {
       )
     })
     return (
-      <div className="report-content" onClick={(e) => this.handleClickContent(e)}>
+      <div
+        className="report-content"
+        onDrop={e => this.handleDrop(e)}
+        onDragOver={e => this.handleDragOver(e)}
+        onClick={(e) => this.handleClickContent(e)}>
         <ResponsiveGridLayout
           onDragStop={this.handleDragStop}
           onResizeStop={this.handleResizeStop}
