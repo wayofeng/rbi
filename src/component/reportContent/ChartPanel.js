@@ -1,8 +1,12 @@
 import { Component } from 'react'
 import ChartMenu from './ChartMenu'
+import RbiLine from '../chartComponent/rbiLine/RbiLine'
 
 import './ChartPanel.scss'
 
+const panelComponents = {
+  'rbi-line': RbiLine
+}
 class ChartPanel extends Component {
   constructor(props) {
     super(props)
@@ -33,18 +37,23 @@ class ChartPanel extends Component {
 
   handleDeletePanel(panel) {
     this.props.handleDeletePanel(panel)
-    console.log(panel.id)
   }
 
   render() {
     const { panel } = this.props
+    const PanelComponent = panelComponents[panel.config.component]
+
+    const isActive = panel.config.active || panel.config.menuShow
+    const actionBtnClassName = `action-btn ${isActive ? 'show' : ''}`
     return (
       <div className="chart-panel">
-        <div className="action-btn" onClick={this.handleClickActionBtn}>
+        <div className={actionBtnClassName} onClick={this.handleClickActionBtn}>
           <i className="iconfont iconmoreif"></i>
         </div>
-        <ChartMenu panel={panel} handleDeletePanel={this.handleDeletePanel}></ChartMenu>
-        <div className="panel-content">{panel.id}</div>
+        <ChartMenu panel={panel} handleDeletePanel={this.handleDeletePanel} handleHideMenu={this.handleHideMenu}></ChartMenu>
+        <div className="panel-content">
+          <PanelComponent panel={panel}></PanelComponent>
+        </div>
       </div>
     )
   }

@@ -7,16 +7,16 @@ class ChartMenu extends Component {
     this.handleDeletePanel = this.handleDeletePanel.bind(this)
   }
 
-  handleDeletePanel() {
-    const { panel } = this.props
-    this.props.handleDeletePanel(panel)
+  handleDeletePanel(e) {
+    e.stopPropagation()
+    this.props.handleDeletePanel(this.props.panel)
   }
 
   render() {
     const { panel } = this.props
     const menu = <div className="chart-menu">
       <ul className="chart-menu-list">
-        <li className="chart-menu-item" onClick={this.handleDeletePanel}>
+        <li className="chart-menu-item" onClick={e => this.handleDeletePanel(e)}>
           <span className="menu-title">删除</span>
         </li>
       </ul>

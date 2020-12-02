@@ -31,39 +31,32 @@ class ReportContent extends Component {
     this.props.handleChangePanel(panel, 'config.dataGrid', newDataGrid)
   }
 
-  // 激活面板
-  handleActive(panel) {
-    this.props.handleChangePanel(panel, 'config.active', true)
-  }
-
-  // 取消面板激活
-  handleInActivePanel() {
-    const oldActivePanel = this.props.panelList.find(panel => panel.config.active)
-    oldActivePanel && this.props.handleChangePanel(oldActivePanel, 'config.active', false)
-    oldActivePanel && this.props.handleChangePanel(oldActivePanel, 'config.menuShow', false)
-  }
-
   // 点击面板
-  handleClickPanel(panel) {
-    this.handleInActivePanel()
-    this.handleActive(panel)
+  handleClickPanel(e, panel) {
+    e.stopPropagation()
+    this.props.handleInActivePanel()
+    this.props.handleActivePanel(panel)
   }
 
   // 显示面板菜单
   handleShowMenu(panel) {
-    this.handleInActivePanel()
-    this.handleActive(panel)
-    this.props.handleChangePanel(panel, 'config.menuShow', true)
+    this.props.handleShowMenu(panel)
   }
 
   // 隐藏面板菜单
   handleHideMenu(panel) {
-    this.props.handleChangePanel(panel, 'config.menuShow', false)
+    this.props.handleHideMenu(panel)
   }
 
   // 删除面板
   handleDeletePanel (panel) {
     this.props.handleDeletePanel(panel)
+  }
+
+  // 点击画布区域
+  handleClickContent (e) {
+    e.stopPropagation()
+    this.props.handleClickContent()
   }
 
   render() {
@@ -75,7 +68,7 @@ class ReportContent extends Component {
     const panelItems = panelList.map(panel => {
       const panelItemClassName = `panel-item ${panel.config.active ? 'active' : ''}`
       return (
-        <div key={panel.id} data-grid={panel.config.dataGrid} className={panelItemClassName} onClick={() => this.handleClickPanel(panel)}>
+        <div key={panel.id} data-grid={panel.config.dataGrid} className={panelItemClassName} onClick={(e) => this.handleClickPanel(e, panel)}>
           <ChartPanel
             panel={panel}
             handleDeletePanel={this.handleDeletePanel}
@@ -85,7 +78,7 @@ class ReportContent extends Component {
       )
     })
     return (
-      <div className="report-content">
+      <div className="report-content" onClick={(e) => this.handleClickContent(e)}>
         <ResponsiveGridLayout
           onDragStop={this.handleDragStop}
           onResizeStop={this.handleResizeStop}
