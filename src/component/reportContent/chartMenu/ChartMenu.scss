@@ -1,0 +1,21 @@
+.chart-menu {
+    position: absolute;
+    right: 10px;
+    top: 40px;
+    width: 80px;
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    padding: 5px 10px;
+    box-shadow:-2px 3px 4px -2px #e4e4e4;
+    z-index: 2;
+    .chart-menu-list {
+      .chart-menu-item {
+        font-size: 12px;
+        text-align: center;
+        cursor: pointer;
+        &:hover {
+          color: #1890ff;
+        }
+      }
+    }
+  }

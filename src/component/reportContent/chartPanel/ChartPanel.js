@@ -1,6 +1,6 @@
 import { Component } from 'react'
-import ChartMenu from './ChartMenu'
-import RbiLine from '../chartComponent/rbiLine/RbiLine'
+import ChartMenu from '../chartMenu/ChartMenu'
+import RbiLine from '../../chartComponent/rbiLine/RbiLine'
 
 import './ChartPanel.scss'
 

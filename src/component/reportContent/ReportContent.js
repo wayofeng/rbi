@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Responsive, WidthProvider } from 'react-grid-layout'
-import ChartPanel from './ChartPanel'
+import ResponsiveGridLayout from './ResponsiveGridLayout'
+import ChartPanel from './chartPanel/ChartPanel'
 
 import './ReportContent.scss'
 
-const ResponsiveGridLayout = WidthProvider(Responsive)
 
 class ReportContent extends Component {
   constructor(props) {
@@ -79,8 +78,9 @@ class ReportContent extends Component {
     const breakpoints = { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }
     const cols = { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }
 
-    const { panelList } = this.props
-
+    const { panelList, settingShow } = this.props
+    const isDraggable = settingShow
+    const isResizable = settingShow
     const panelItems = panelList.map(panel => {
       const panelItemClassName = `panel-item ${panel.config.active ? 'active' : ''}`
       return (
@@ -105,6 +105,8 @@ class ReportContent extends Component {
           className="layout"
           rowHeight={30}
           breakpoints={breakpoints}
+          isDraggable={isDraggable}
+          isResizable={isResizable}
           cols={cols}>
           {panelItems}
         </ResponsiveGridLayout>

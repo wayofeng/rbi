@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import './ChartMenu.scss'
 
 class ChartMenu extends Component {
   constructor(props) {

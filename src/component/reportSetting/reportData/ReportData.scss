@@ -1,0 +1,105 @@
+.data-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  .data-panel {
+    flex: 1;
+    border-right: 1px solid #e1e1e1;
+  }
+  .data-model {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    .data-model-header {
+      padding: 10px;
+    }
+    .data-model-body {
+      flex: 1;
+      position: relative;
+      .dimension-field {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 50%;
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 8px;
+          right: 8px;
+          height: 0;
+          border-top: 1px solid #e1e1e1;
+        }
+      }
+      .measure-field {     
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        height: 50%;
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 8px;
+          right: 8px;
+          height: 0;
+          border-top: 1px solid #e1e1e1;
+        }
+      }
+      .field-item-wrap {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        .field-item {
+          padding: 0 10px 0 20px;
+          font-size: 13px;
+          line-height: 28px;
+          cursor: pointer;
+          color: #555555;
+          display: flex;
+          overflow: hidden;
+          .iconfont {
+            position: relative;
+            top: 2px;
+            color: #696969;
+          }
+          .field-title {
+            flex: 1;
+            line-height: 30px;
+            margin-left: 6px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+      .field-group-title {
+        line-height: 40px;
+        padding: 0 10px;
+        font-size: 13px;
+        font-weight: bold;
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        .iconarrow-down, .iconarrow-top {
+          font-size: 12px;
+          margin-right: 6px;
+        }
+        .bar {
+          position: absolute;
+          left: 50%;
+          top: 0;
+          color: #aaa9a9;
+          font-size: 13px;
+        }
+      }
+      
+    }
+  }
+}

@@ -1,6 +1,7 @@
 .report-header {
   display: flex;
   justify-content: space-between;
+  margin: 0 -30px;
   .report-name {
     display: block;
     width: 160px;
@@ -8,5 +9,16 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  .report-action-btn {
+    top: -3px;
+  }
+  .ant-radio-button-wrapper {
+    padding: 0 20px;
+    font-size: 13px;
+  }
+  .ant-btn {
+    padding: 0 18px;
+    font-size: 13px;
   }
 }

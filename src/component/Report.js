@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 import UUID from 'uuidjs'
 import { Layout } from 'antd'
-import ReactHeader from './reportHeader/ReportHeader'
+import ReportHeader from './reportHeader/ReportHeader'
 import ReportComponent from './reportComponent/ReportComponent'
 import ReportContent from './reportContent/ReportContent'
 import ReportSetting from './reportSetting/ReportSetting'
@@ -15,7 +15,8 @@ class Report extends Component {
     super(props)
     this.state = {
       panelList: [],
-      activePanel: null
+      activePanel: null,
+      settingShow: true
     }
     this.addPanel = this.addPanel.bind(this)
     this.changePanelProp = this.changePanelProp.bind(this)
@@ -25,6 +26,7 @@ class Report extends Component {
     this.handleClickContent = this.handleClickContent.bind(this)
     this.handleShowMenu = this.handleShowMenu.bind(this)
     this.handleHideMenu = this.handleHideMenu.bind(this)
+    this.switchEditOrPreview = this.switchEditOrPreview.bind(this)
   }
 
   componentDidMount() {
@@ -49,9 +51,9 @@ class Report extends Component {
   // 添加组件
   addPanel(sourcePanel) {
     const y = this.computedComponentY()
-    const panel = _.cloneDeep(sourcePanel) 
+    const panel = _.cloneDeep(sourcePanel)
     panel.id = UUID.generate()
-    panel.config.title = _.uniqueId('panel-') 
+    panel.config.title = _.uniqueId('panel-')
     panel.config.dataGrid.y = y
 
     const newPanelList = [...this.state.panelList, panel]
@@ -62,7 +64,7 @@ class Report extends Component {
   }
 
   // 计算新组件放置的位置
-  computedComponentY () {
+  computedComponentY() {
     const { panelList } = this.state
     const yList = panelList.map(panel => panel.config.dataGrid.y + panel.config.dataGrid.h)
     if (yList.length) {
@@ -71,7 +73,7 @@ class Report extends Component {
       return Number(yMax)
     }
     return 0
-  } 
+  }
   // 删除组件
   deletePanel(panel) {
     const { panelList } = this.state
@@ -83,7 +85,7 @@ class Report extends Component {
   }
 
   // 更新单个组件
-  updatePanelItem (newPanel) {
+  updatePanelItem(newPanel) {
     const { panelList } = this.state
     const index = panelList.findIndex(item => item.id === newPanel.id)
     if (index > -1) {
@@ -95,7 +97,7 @@ class Report extends Component {
   }
 
   // 更新多个组件
-  updatePanelList (newPanelList) {
+  updatePanelList(newPanelList) {
     const { panelList } = this.state
     newPanelList.forEach(newPanel => {
       const index = panelList.findIndex(item => item.id === newPanel.id)
@@ -114,7 +116,7 @@ class Report extends Component {
   }
 
   // 修改panel多个属性, 返回属性修改后的panel
-  changePanelProps (panel, pathValueMap) {
+  changePanelProps(panel, pathValueMap) {
     return Object.keys(pathValueMap).reduce((newPanel, path) => {
       return this.changePanelProp(newPanel, path, pathValueMap[path])
     }, panel)
@@ -147,7 +149,7 @@ class Report extends Component {
   }
 
   // 显示面板菜单
-  handleShowMenu (panel) {
+  handleShowMenu(panel) {
     this.handleInActivePanel()
     this.handleActivePanel(panel)
     const newPanel = this.changePanelProp(panel, 'config.menuShow', true)
@@ -155,29 +157,39 @@ class Report extends Component {
   }
 
   // 隐藏面板菜单
-  handleHideMenu (panel) {
+  handleHideMenu(panel) {
     const newPanel = this.changePanelProp(panel, 'config.menuShow', false)
     this.updatePanelItem(newPanel)
   }
 
   // 点击画布区域
-  handleClickContent () {
+  handleClickContent() {
     this.handleInActivePanel()
   }
 
+  // 切换报表为编辑或预览
+  switchEditOrPreview(value) {
+    const settingShow = value === 'edit'
+    this.setState({
+      settingShow
+    })
+  }
+
   render() {
-    const { panelList } = this.state
+    const { panelList, settingShow } = this.state
+    const sliderComponent = settingShow ? <Sider width="400" theme="light"><ReportSetting></ReportSetting></Sider> : ''
     return (
       <div className="report">
         <Layout className="report-layout">
           <Header style={{ height: '50px', lineHeight: '50px' }} theme="light">
-            <ReactHeader></ReactHeader>
+            <ReportHeader switchEditOrPreview={this.switchEditOrPreview}></ReportHeader>
           </Header>
           <Layout>
             <Content>
               <ReportComponent handleAddPanel={this.addPanel}></ReportComponent>
               <ReportContent
                 panelList={panelList}
+                settingShow={settingShow}
                 handleAddPanel={this.addPanel}
                 handleActivePanel={this.handleActivePanel}
                 handleInActivePanel={this.handleInActivePanel}
@@ -187,9 +199,7 @@ class Report extends Component {
                 handleHideMenu={this.handleHideMenu}
                 handleChangePanel={this.changePanelProp}></ReportContent>
             </Content>
-            <Sider width="400" theme="light">
-              <ReportSetting></ReportSetting>
-            </Sider>
+            {sliderComponent}
           </Layout>
         </Layout>
       </div>
