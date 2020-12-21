@@ -1,11 +1,11 @@
 import React from 'react'
-import './App.css';
 import Report from './component/Report'
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Report></Report>
+        <Report></Report>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { DragDropContext } from 'react-beautiful-dnd'
 import _ from 'lodash'
 import UUID from 'uuidjs'
 import { Layout } from 'antd'
@@ -179,30 +180,32 @@ class Report extends Component {
     const { panelList, settingShow } = this.state
     const sliderComponent = settingShow ? <Sider width="400" theme="light"><ReportSetting></ReportSetting></Sider> : ''
     return (
-      <div className="report">
-        <Layout className="report-layout">
-          <Header style={{ height: '50px', lineHeight: '50px' }} theme="light">
-            <ReportHeader switchEditOrPreview={this.switchEditOrPreview}></ReportHeader>
-          </Header>
-          <Layout>
-            <Content>
-              <ReportComponent handleAddPanel={this.addPanel}></ReportComponent>
-              <ReportContent
-                panelList={panelList}
-                settingShow={settingShow}
-                handleAddPanel={this.addPanel}
-                handleActivePanel={this.handleActivePanel}
-                handleInActivePanel={this.handleInActivePanel}
-                handleDeletePanel={this.deletePanel}
-                handleClickContent={this.handleClickContent}
-                handleShowMenu={this.handleShowMenu}
-                handleHideMenu={this.handleHideMenu}
-                handleChangePanel={this.changePanelProp}></ReportContent>
-            </Content>
-            {sliderComponent}
+      <DragDropContext onDragEnd={() => {}}>
+        <div className="report">
+          <Layout className="report-layout">
+            <Header style={{ height: '50px', lineHeight: '50px' }} theme="light">
+              <ReportHeader switchEditOrPreview={this.switchEditOrPreview}></ReportHeader>
+            </Header>
+            <Layout>
+              <Content>
+                <ReportComponent handleAddPanel={this.addPanel}></ReportComponent>
+                <ReportContent
+                  panelList={panelList}
+                  settingShow={settingShow}
+                  handleAddPanel={this.addPanel}
+                  handleActivePanel={this.handleActivePanel}
+                  handleInActivePanel={this.handleInActivePanel}
+                  handleDeletePanel={this.deletePanel}
+                  handleClickContent={this.handleClickContent}
+                  handleShowMenu={this.handleShowMenu}
+                  handleHideMenu={this.handleHideMenu}
+                  handleChangePanel={this.changePanelProp}></ReportContent>
+              </Content>
+              {sliderComponent}
+            </Layout>
           </Layout>
-        </Layout>
-      </div>
+        </div>
+      </DragDropContext>
     )
   }
 }
