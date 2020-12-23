@@ -6,7 +6,20 @@ class DataField extends Component {
     super(props)
     this.state = {
     }
+    this.onDragOver = this.onDragOver.bind(this)
   }
+
+  onDragOver (e) {
+    e.preventDefault()
+    e.dataTransfer.dropEffect = 'copy'
+  }
+
+  onDrop (e) {
+    e.preventDefault()
+    const feild = e.dataTransfer.getData('field')
+    console.log(JSON.parse(feild))
+  }
+
   render() {
     const DataFieldItem = (fields = []) => {
       const fieldItems = (
@@ -52,10 +65,10 @@ class DataField extends Component {
     }
     return (
       <div className="data-panel">
-        <div className="data-field">
+        <div className="data-field" onDragOver={this.onDragOver} onDrop={this.onDrop}>
           {DataFieldItem([1])}
           {DataFieldItem()}
-          <div className="refresh-data">
+          <div className="refresh-data" >
             <Button type="primary" block>更新</Button>
           </div>
         </div>

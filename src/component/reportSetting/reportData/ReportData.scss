@@ -3,10 +3,6 @@
   height: 100%;
   position: relative;
   display: flex;
-  .data-panel {
-    flex: 1;
-    border-right: 1px solid #e1e1e1;
-  }
   .data-model {
     flex: 1;
     display: flex;
@@ -58,22 +54,29 @@
         flex: 1;
         overflow-y: auto;
         overflow-x: hidden;
+        padding: 0 4px;
+        .field-item-content {
+          margin-bottom: 2px;
+        }
         .field-item {
-          padding: 0 10px 0 20px;
-          font-size: 13px;
-          line-height: 28px;
+          padding: 0 10px 0 10px;
+          font-size: 12px;
+          border: 1px solid #cfcfcf;
+          background-color: #fdfdfd;
           cursor: pointer;
-          color: #555555;
+          color: #696969;
           display: flex;
           overflow: hidden;
           .iconfont {
             position: relative;
             top: 2px;
             color: #696969;
+            line-height: 22px;
+            font-size: 15px;
           }
           .field-title {
             flex: 1;
-            line-height: 30px;
+            line-height: 22px;
             margin-left: 6px;
             white-space: nowrap;
             text-overflow: ellipsis;
@@ -87,16 +90,17 @@
         }
       }
       .field-group-title {
-        line-height: 40px;
+        line-height: 32px;
+        height: 32px;
         padding: 0 10px;
         font-size: 13px;
         font-weight: bold;
         cursor: pointer;
         position: relative;
         display: flex;
-        .iconarrow-down, .iconarrow-top {
+        .iconarrow-down, .iconarrow-right {
           font-size: 12px;
-          margin-right: 6px;
+          margin-right: 4px;
         }
         .bar {
           position: absolute;
@@ -110,9 +114,11 @@
     }
   }
   .data-panel {
+    flex: 1;
     display: flex;
     flex-direction: column;
     position: relative;
+    border-right: 1px solid #e1e1e1;
     .data-field {
       width: 100%;
       flex: 1;

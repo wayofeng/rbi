@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Select, Input } from 'antd'
-import { Droppable, Draggable } from 'react-beautiful-dnd'
 
 const { Option } = Select
 const { Search } = Input
@@ -123,11 +122,9 @@ class ReportDataField extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      fieldPanel: {
-        dimensionExpand: true,
-        measureExpand: true,
-        measureTop: -1
-      },
+      dimensionExpand: true,
+      measureExpand: true,
+      measureTop: -1,
       dataModelList: [
         {
           title: '示例模型1',
@@ -163,6 +160,10 @@ class ReportDataField extends Component {
     this.startMoveMeasure = this.startMoveMeasure.bind(this)
     this.endMoveMeasure = this.endMoveMeasure.bind(this)
     this.onFieldSearch = this.onFieldSearch.bind(this)
+    this.onDragStart = this.onDragStart.bind(this)
+    this.onDragOver = this.onDragOver.bind(this)
+    this.onDrop = this.onDrop.bind(this)
+    this.toggleFieldList = this.toggleFieldList.bind(this)
 
     this.fieldRef = React.createRef()
     this.measureFieldRef = React.createRef()
@@ -170,15 +171,18 @@ class ReportDataField extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      const fieldWrap = this.fieldRef.current
-      fieldWrapHeight = fieldWrap.getBoundingClientRect().height
+      const fieldWrapHeight = this.getFieldWrapHeight()
       this.setState({
         measureFieldTop: fieldWrapHeight / 2,
         dimensionFieldHeight: fieldWrapHeight / 2,
         measureFieldHeight: fieldWrapHeight / 2
       })
     }, 0);
+  }
 
+  getFieldWrapHeight() {
+    const fieldWrap = this.fieldRef.current
+    return fieldWrap ? fieldWrap.getBoundingClientRect().height : 0
   }
 
   onModelChange(value) { }
@@ -233,44 +237,65 @@ class ReportDataField extends Component {
     }
   }
 
+  onDragStart(e, field) {
+    e.dataTransfer.dropEffect = "copy"
+    e.dataTransfer.setData('field', JSON.stringify(field))
+  }
+
+  onDragOver(e) {
+    e.preventDefault()
+  }
+
+  onDrop(e) {
+    e.preventDefault()
+  }
+
+  toggleFieldList(type, isExpand) {
+    if (this.state.isMoveMeasure) return
+    const fieldWrapHeight = this.getFieldWrapHeight()
+    if (type === 'dimension') {
+      this.setState((state) => ({
+        dimensionExpand: !state.dimensionExpand,
+        dimensionFieldHeight: state.dimensionExpand ? 0 : fieldWrapHeight / 2,
+        measureFieldTop: state.dimensionExpand ? 32 : fieldWrapHeight / 2,
+        measureFieldHeight: !state.measureExpand ? 0 : state.dimensionExpand ? fieldWrapHeight - 32 : fieldWrapHeight / 2
+      }))
+    } else {
+      this.setState((state) => ({
+        measureExpand: !state.measureExpand,
+        measureFieldHeight: state.measureExpand ? 0 : state.dimensionExpand ? fieldWrapHeight / 2 : fieldWrapHeight
+      }))
+    }
+  }
+
   render() {
-    const { dataModelList, fieldList, fieldPanel, measureFieldTop, dimensionFieldHeight, measureFieldHeight } = this.state
+    const { dataModelList, fieldList, dimensionExpand, measureExpand, measureFieldTop, dimensionFieldHeight, measureFieldHeight } = this.state
     const { dimension, measure } = fieldList
-    const { dimensionExpand, measureExpand } = fieldPanel
     const dataModelItems = dataModelList.map(item => (
       <Option value={item.value} key={item.value}>{item.title}</Option>
     ))
 
-    const fieldItems = (fields, id) => (
-      <Droppable droppableId={id}>
-        {provided =>
-          <div className="field-items" ref={provided.innerRef} >
-            {fields.map((field, index) =>
-                <Draggable draggableId={field.alias} index={index} key={field.alias}>
-                  {(provided) => {
-                    const classNameList = `iconfont ${fieldTypeIconMap[field.type] || fieldTypeIconMap.string}`
-                    return (<div className="field-item" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                      <i className={classNameList}></i>
-                      <span className="field-title">{field.comment}</span>
-                    </div>)
-                  }}
-                </Draggable>
-              )}
-              {provided.placeholder}
+    const fieldItems = (fields) => {
+      return fields.map(field => {
+        const classNameList = `iconfont ${fieldTypeIconMap[field.type] || fieldTypeIconMap.string}`
+        return (<div className="field-item-content" key={field.alias}>
+          <div className="field-item" draggable={true} onDragStart={e => this.onDragStart(e, field)}>
+            <i className={classNameList}></i>
+            <span className="field-title">{field.comment}</span>
           </div>
-        }
-      </Droppable>
-    )
+        </div>)
+      })
+    }
 
     const emptyData = (
       <div className="empty-data">暂无数据</div>
     )
     return (
-      <div className="data-model">
+      <div className="data-model" onClick={this.endMoveMeasure}>
         <div className="data-model-header">
           <Select
             showSearch
-            style={{ width: 180, marginBottom: 10 }}
+            style={{ width: 160, marginBottom: 10 }}
             size="small"
             placeholder="请选择模型"
             optionFilterProp="children"
@@ -282,34 +307,32 @@ class ReportDataField extends Component {
           >
             {dataModelItems}
           </Select>
-          <Search placeholder="请输入关键字搜索" size="small" onSearch={this.onFieldSearch} style={{ width: 180 }} />
+          <Search placeholder="请输入关键字搜索" size="small" onSearch={this.onFieldSearch} style={{ width: 160 }} />
         </div>
         <div className="data-model-body" ref={this.fieldRef}>
           <div className="dimension-field" style={{ height: dimensionFieldHeight }}>
-            <div className="field-group-title">
+            <div className="field-group-title" onClick={() => this.toggleFieldList('dimension')}>
               <div className="group-title">
                 {dimensionExpand ? <i className="iconfont iconarrow-down"></i> :
-                  <i className="iconfont iconarrow-top"></i>} 维度
+                  <i className="iconfont iconarrow-right"></i>} 维度
                 </div>
             </div>
-            <div className="field-item-wrap">
-              {dimension.length ? fieldItems(dimension, 'dimension') : emptyData}
+            <div className="field-item-wrap" onDragOver={this.onDragOver} onDrop={this.onDrop}>
+              {dimension.length ? fieldItems(dimension) : emptyData}
             </div>
           </div>
           <div className="measure-field" style={{ top: measureFieldTop, height: measureFieldHeight }} ref={this.measureFieldRef}>
-            <div className="field-group-title">
+            <div className="field-group-title" onClick={() => this.toggleFieldList('measure')}>
               <div className="group-title">
-                {measureExpand ? <i className="iconfont iconarrow-down"></i> :
-                  <i className="iconfont iconarrow-top"></i>} 度量
+                {measureExpand ? <i className="iconfont iconarrow-down" ></i> :
+                  <i className="iconfont iconarrow-right"></i>} 度量
                 </div>
               <i className="iconfont bar iconmenucaidan"
                 onMouseDown={this.startMoveMeasure}
                 onMouseMove={e => this.moveMeasureField(e)}></i>
             </div>
-            <div className="field-item-wrap">
-              {/* <DragDropContext>
-                {measure.length ? fieldItems(measure) : emptyData}
-              </DragDropContext> */}
+            <div className="field-item-wrap" onDragOver={this.onDragOver} onDrop={this.onDrop}>
+              {measure.length ? fieldItems(measure) : emptyData}
             </div>
           </div>
         </div>
